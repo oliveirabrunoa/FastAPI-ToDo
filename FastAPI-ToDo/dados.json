@@ -1,0 +1,36 @@
+{
+    "todo_list": [
+      {
+        "id": 1,
+        "title": "Estudar funções de linguagem",
+        "description": "Revisar conceitos de funções de linguagem para o Enem",
+        "priority": "alta",
+        "status": "pendente",
+        "due_date": "2025-02-25"
+      },
+      {
+        "id": 2,
+        "title": "Criar lista de exercícios",
+        "description": "Montar 20 questões sobre frações algébricas para o 8º ano",
+        "priority": "média",
+        "status": "em andamento",
+        "due_date": "2025-02-28"
+      },
+      {
+        "id": 3,
+        "title": "Revisar intertextualidade",
+        "description": "Resolver exercícios de interpretação com foco em intertextualidade",
+        "priority": "alta",
+        "status": "pendente",
+        "due_date": "2025-03-01"
+      },
+      {
+        "id": 4,
+        "title": "Escrever texto da landing page",
+        "description": "Finalizar conteúdo persuasivo para a página principal",
+        "priority": "alta",
+        "status": "concluído",
+        "due_date": "2025-02-20"
+      }
+    ]
+  }
