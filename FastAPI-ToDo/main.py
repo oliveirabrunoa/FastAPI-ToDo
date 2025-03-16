@@ -2,28 +2,57 @@ from fastapi import FastAPI, status
 import json
 from database import SessionLocal
 from typing import List
-from models import Task
+import models
+from pydantic import BaseModel
 
 app = FastAPI()
 db = SessionLocal()
 
-@app.get("/tasks", status_code=status.HTTP_200_OK)
+class Task(BaseModel):
+    id: int
+    title: str
+    description: str
+    status: bool
+
+    class Config:
+        orm_mode = True
+
+class TaskCreate(BaseModel):
+    title: str
+    description: str
+    status: bool
+
+@app.get("/tasks", response_model=List[Task], status_code=status.HTTP_200_OK)
 def get_all_taks() -> dict:
-    taks = db.query(Task).all()
-    return {'taks': taks}
+    tasks = db.query(models.Task).all()
+    return tasks
 
-@app.get("/task/{task_id}")
-def task(task_id: int):
-    pass
+@app.get("/tasks/{task_id}", response_model=Task, status_code=status.HTTP_200_OK)
+def get_an_task(task_id: int):
+    task = db.query(models.Task).filter(models.Task.id == task_id).first()
+    return task
 
-@app.post("/task", status_code=status.HTTP_201_CREATED)
-def create_task(task: dict) -> dict:
-    pass
+@app.post("/task", response_model=TaskCreate, status_code=status.HTTP_201_CREATED)
+def create_task(task: TaskCreate):
+    new_task=models.Task(title=task.title,
+                         description=task.description,
+                         status=task.status)
+    db.add(new_task)
+    db.commit()
+    return new_task
 
-@app.put("/task/{task_id}")
-def update_task(task_id: int) -> dict:
-    pass
+@app.put("/task/{task_id}", response_model=TaskCreate, status_code=status.HTTP_200_OK)
+def update_task(task_id: int, task: TaskCreate):
+    update_task = db.query(models.Task).filter(models.Task.id == task_id).first()
+    update_task.title = task.title
+    update_task.description = task.description
+    update_task.status = task.status
+    db.commit()
+    return update_task
 
-@app.delete("/task/{task_id}")
+@app.delete("/task/{task_id}", status_code=status.HTTP_200_OK)
 def delete_task(task_id: int) -> dict:
-    pass
+    item_to_delete = db.query(models.Task).filter(models.Task.id == task_id).first()
+    db.delete(item_to_delete)
+    db.commit()
+    return {"message": "Task deleted successfully"}
