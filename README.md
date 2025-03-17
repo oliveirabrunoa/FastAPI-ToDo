@@ -1,6 +1,6 @@
-# Estudos FastAPI
+# TaskManager
 
-Este repositório contém materiais e exemplos de código para o estudo do FastAPI.
+Este repositório contém materiais e exemplos de código para o estudo do FastAPI. Uma aplicação de gestão de tarefas através de operações de CRUD.
 
 ## Conteúdo
 
@@ -37,6 +37,17 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
     ```bash
     pip install -r requirements.txt
     ```
+
+## Criando bando de dados
+```
+python create_db.py
+ ```
+ 
+
+## Executando o projeto
+```
+uvicorn main:app --reload
+ ```
 
 ## Recursos Adicionais
 
