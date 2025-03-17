@@ -48,6 +48,37 @@ python create_db.py
 ```
 uvicorn main:app --reload
  ```
+## Endpoints
+
+### Obter todas as tarefas
+- **URL:** `/tasks`
+- **Método:** `GET`
+- **Resposta:** Lista de tarefas
+
+### Obter uma tarefa
+- **URL:** `/tasks/{task_id}`
+- **Método:** `GET`
+- **Resposta:** Detalhes da tarefa
+
+### Criar uma nova tarefa
+- **URL:** `/tasks`
+- **Método:** `POST`
+- **Corpo da Requisição:** 
+- **Resposta:** Detalhes da tarefa criada
+
+### Atualizar uma tarefa
+- **URL:** `/tasks/{task_id}`
+- **Método:** `PUT`
+- **Corpo da Requisição:** 
+- **Resposta:** Detalhes da tarefa atualizada
+
+### Excluir uma tarefa
+- **URL:** `/tasks/{task_id}`
+- **Método:** `DELETE`
+- **Resposta:** Mensagem de sucesso
+
+## Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 ## Recursos Adicionais
 

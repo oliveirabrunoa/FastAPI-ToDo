@@ -32,7 +32,7 @@ def get_an_task(task_id: int):
     task = db.query(models.Task).filter(models.Task.id == task_id).first()
     return task
 
-@app.post("/task", response_model=TaskCreate, status_code=status.HTTP_201_CREATED)
+@app.post("/tasks", response_model=TaskCreate, status_code=status.HTTP_201_CREATED)
 def create_task(task: TaskCreate):
     new_task=models.Task(title=task.title,
                          description=task.description,
@@ -41,7 +41,7 @@ def create_task(task: TaskCreate):
     db.commit()
     return new_task
 
-@app.put("/task/{task_id}", response_model=TaskCreate, status_code=status.HTTP_200_OK)
+@app.put("/tasks/{task_id}", response_model=TaskCreate, status_code=status.HTTP_200_OK)
 def update_task(task_id: int, task: TaskCreate):
     update_task = db.query(models.Task).filter(models.Task.id == task_id).first()
     update_task.title = task.title
@@ -50,7 +50,7 @@ def update_task(task_id: int, task: TaskCreate):
     db.commit()
     return update_task
 
-@app.delete("/task/{task_id}", status_code=status.HTTP_200_OK)
+@app.delete("/tasks/{task_id}", status_code=status.HTTP_200_OK)
 def delete_task(task_id: int) -> dict:
     item_to_delete = db.query(models.Task).filter(models.Task.id == task_id).first()
     db.delete(item_to_delete)
